@@ -1,13 +1,23 @@
 ﻿using DA.Models;
+using DAL.Interfaces;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+using System.Security.Claims;
 
 namespace DA
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public DbSet<User> Users => Set<User>();
+        public ApplicationDbContext(
+            DbContextOptions<ApplicationDbContext> options,
+            IHttpContextAccessor httpContextAccessor) : base(options)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
         public DbSet<Product> Products => Set<Product>();
         public DbSet<Category> Categories => Set<Category>();
         public DbSet<Order> Orders => Set<Order>();
@@ -30,6 +40,74 @@ namespace DA
                 .HasOne(p => p.Category)
                 .WithMany(c => c.Products)
                 .HasForeignKey(p => p.CategoryId);
+
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                if (typeof(ISoftDelete).IsAssignableFrom(entityType.ClrType))
+                {
+                    modelBuilder.Entity(entityType.ClrType)
+                        .HasQueryFilter(CreateSoftDeleteFilter(entityType.ClrType));
+                }
+            }
+
+        }
+
+        private static LambdaExpression CreateSoftDeleteFilter(Type entityType)
+        {
+            // (e => !e.IsDeleted)
+            var parameter = Expression.Parameter(entityType, "e");
+            var property = Expression.Property(parameter, nameof(ISoftDelete.IsDeleted));
+            var notDeleted = Expression.Not(property);
+            var lambda = Expression.Lambda(notDeleted, parameter);
+            return lambda;
+        }
+        private void UpdateAuditFields()
+        {
+            var userId = _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+            var now = DateTime.UtcNow;
+
+            foreach (var entry in ChangeTracker.Entries())
+            {
+                // 1. التعامل مع IAuditable
+                if (entry.Entity is IAuditable auditableEntity)
+                {
+                    if (entry.State == EntityState.Added)
+                    {
+                        auditableEntity.CreatedOnUtc = now;
+                        auditableEntity.CreatedById = userId;
+                    }
+                    else if (entry.State == EntityState.Modified)
+                    {
+                        auditableEntity.ModifiedOnUtc = now;
+                        auditableEntity.ModifiedById = userId;
+                    }
+                }
+
+                // 2. التعامل مع ISoftDelete
+                if (entry.Entity is ISoftDelete softDeleteEntity)
+                {
+                    if (entry.State == EntityState.Deleted)
+                    {
+                        // منع الحذف الفعلي وتحويله إلى تعديل
+                        entry.State = EntityState.Modified;
+                        softDeleteEntity.IsDeleted = true;
+                        softDeleteEntity.DeletedOnUtc = now;
+                        softDeleteEntity.DeletedById = userId;
+                    }
+                }
+            }
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            UpdateAuditFields();
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        public override int SaveChanges()
+        {
+            UpdateAuditFields();
+            return base.SaveChanges();
         }
     }
 }

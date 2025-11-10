@@ -1,18 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DAL.Enums;
+using DAL.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DA.Models
 {
-    public class Order
+    public class Order : BaseModel
     {
-        public int Id { get; set; }
-
-        public int UserId { get; set; }
-        public User? User { get; set; }
-
+        [Required]
+        public string UserId { get; set; }
+        public ApplicationUser? User { get; set; }
         public DateTime OrderDate { get; set; } = DateTime.UtcNow;
 
         [MaxLength(50)]
-        public string Status { get; set; } = "Pending"; // Pending / Shipped / Delivered / Cancelled
+        public OrderStatus Status { get; set; } = OrderStatus.Pending; // Pending / Shipped / Delivered / Cancelled
 
         public decimal TotalAmount { get; set; }
 

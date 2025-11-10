@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DAL.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DA.Models
 {
-    public class Category
+    public class Category : BaseModel
     {
-        public int Id { get; set; }
 
         [Required, MaxLength(150)]
         public string Name { get; set; } = string.Empty;

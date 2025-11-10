@@ -1,13 +1,13 @@
-﻿namespace DA.Models
-{
-    public class OrderItem
-    {
-        public int Id { get; set; }
+﻿using DAL.Models;
 
-        public int OrderId { get; set; }
+namespace DA.Models
+{
+    public class OrderItem : BaseModel
+    {
+        public string OrderId { get; set; }
         public Order? Order { get; set; }
 
-        public int ProductId { get; set; }
+        public string ProductId { get; set; }
         public Product? Product { get; set; }
 
         public int Quantity { get; set; }

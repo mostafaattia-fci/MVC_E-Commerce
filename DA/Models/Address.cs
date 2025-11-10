@@ -1,14 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DAL.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DA.Models
 {
-    public class Address
+    public class Address : BaseModel
     {
-        public int Id { get; set; }
-
-        public int UserId { get; set; }
-        public User? User { get; set; }
-
         [Required, MaxLength(200)]
         public string Street { get; set; } = string.Empty;
 

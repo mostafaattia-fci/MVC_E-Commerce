@@ -1,13 +1,15 @@
-﻿namespace DA.Models
+﻿using DAL.Models;
+using System.ComponentModel.DataAnnotations;
+
+namespace DA.Models
 {
-    public class CartItem
+    public class CartItem : BaseModel
     {
-        public int Id { get; set; }
+        [Required]
+        public string UserId { get; set; }
+        public ApplicationUser? User { get; set; }
 
-        public int UserId { get; set; }
-        public User? User { get; set; }
-
-        public int ProductId { get; set; }
+        public string ProductId { get; set; }
         public Product? Product { get; set; }
 
         public int Quantity { get; set; }

@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DAL.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DA.Models
 {
-    public class Product
+    public class Product : BaseModel
     {
-        public int Id { get; set; }
 
         [Required, MaxLength(200)]
         public string Name { get; set; } = string.Empty;
@@ -18,7 +18,7 @@ namespace DA.Models
 
         public string? ImageUrl { get; set; }
 
-        public int CategoryId { get; set; }
+        public string CategoryId { get; set; }
         public Category? Category { get; set; }
 
         public ICollection<Review>? Reviews { get; set; }

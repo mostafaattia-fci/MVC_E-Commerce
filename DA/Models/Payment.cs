@@ -1,16 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DAL.Enums;
+using DAL.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DA.Models
 {
-    public class Payment
+    public class Payment : BaseModel
     {
-        public int Id { get; set; }
-
-        public int OrderId { get; set; }
+        public string OrderId { get; set; }
         public Order? Order { get; set; }
 
         [Required]
-        public string PaymentMethod { get; set; } = string.Empty; // Stripe / PayPal / Fawry
+        public PaymentMethod PaymentMethod { get; set; } // Stripe / PayPal / Fawry
 
         public string? TransactionId { get; set; }
 

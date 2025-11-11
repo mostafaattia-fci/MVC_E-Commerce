@@ -1,14 +1,15 @@
-﻿using System.Linq.Expressions;
-
-namespace DAL.Interfaces
+﻿namespace DAL.Interfaces
 {
     public interface IRepository<T> where T : class
     {
-        Task<T?> GetByIdAsync(string id);
-        Task<IEnumerable<T>> GetAllAsync();
-        Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
-        Task AddAsync(T entity);
+        Task<T?> GetByIdAsync(string id, CancellationToken cancellationToken = default);
+
+        IQueryable<T> GetQueryable();
+
+        Task AddAsync(T entity, CancellationToken cancellationToken = default);
+
         void Update(T entity);
+
         void Remove(T entity);
     }
 }

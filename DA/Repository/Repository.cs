@@ -1,7 +1,6 @@
 ﻿using DA;
 using DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace DAL.Repository
 {
@@ -16,34 +15,30 @@ namespace DAL.Repository
             _dbSet = context.Set<T>();
         }
 
-        public async Task AddAsync(T entity)
+        public async Task<T?> GetByIdAsync(string id, CancellationToken cancellationToken = default)
         {
-            await _dbSet.AddAsync(entity);
+
+            return await _dbSet.FindAsync(new object[] { id }, cancellationToken);
         }
 
-        public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)
+        public IQueryable<T> GetQueryable()
         {
-            return await _dbSet.Where(predicate).ToListAsync();
+            return _dbSet.AsNoTracking();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task AddAsync(T entity, CancellationToken cancellationToken = default)
         {
-            return await _dbSet.ToListAsync();
-        }
-
-        public async Task<T?> GetByIdAsync(string id)
-        {
-            return await _dbSet.FindAsync(id);
-        }
-
-        public void Remove(T entity)
-        {
-            _dbSet.Remove(entity);
+            await _dbSet.AddAsync(entity, cancellationToken);
         }
 
         public void Update(T entity)
         {
             _dbSet.Update(entity);
+        }
+
+        public void Remove(T entity)
+        {
+            _dbSet.Remove(entity);
         }
     }
 }

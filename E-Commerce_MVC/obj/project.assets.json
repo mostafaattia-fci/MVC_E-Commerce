@@ -5016,23 +5016,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Mostafa1\\.nuget\\packages\\": {},
+    "C:\\Users\\saide\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mostafa1\\source\\repos\\MVC_E-Commerce\\E-Commerce_MVC\\E-Commerce_MVC.csproj",
+      "projectUniqueName": "C:\\Users\\saide\\Desktop\\mvc_project\\E-Commerce_MVC\\E-Commerce_MVC.csproj",
       "projectName": "E-Commerce_MVC",
-      "projectPath": "C:\\Users\\Mostafa1\\source\\repos\\MVC_E-Commerce\\E-Commerce_MVC\\E-Commerce_MVC.csproj",
-      "packagesPath": "C:\\Users\\Mostafa1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mostafa1\\source\\repos\\MVC_E-Commerce\\E-Commerce_MVC\\obj\\",
+      "projectPath": "C:\\Users\\saide\\Desktop\\mvc_project\\E-Commerce_MVC\\E-Commerce_MVC.csproj",
+      "packagesPath": "C:\\Users\\saide\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\saide\\Desktop\\mvc_project\\E-Commerce_MVC\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Mostafa1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\saide\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -5041,14 +5041,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\Mostafa1\\source\\repos\\MVC_E-Commerce\\BL\\BLL.csproj": {
-              "projectPath": "C:\\Users\\Mostafa1\\source\\repos\\MVC_E-Commerce\\BL\\BLL.csproj"
+            "C:\\Users\\saide\\Desktop\\mvc_project\\BL\\BLL.csproj": {
+              "projectPath": "C:\\Users\\saide\\Desktop\\mvc_project\\BL\\BLL.csproj"
             }
           }
         }

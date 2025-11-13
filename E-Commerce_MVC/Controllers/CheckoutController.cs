@@ -2,14 +2,15 @@
 using BLL.Services.Address;
 using BLL.Services.Cartitem;
 using BLL.Services.Order;
-using BLL.Services.OrderItem;
 using E_Commerce_MVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-public class CheckoutController(IOrderService orderService, IAddressService addressService , ICartItemService cartItemService) : Controller
+[Authorize]
+public class CheckoutController(IOrderService orderService, IAddressService addressService, ICartItemService cartItemService) : Controller
 {
- 
+
     public async Task<IActionResult> Index()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -17,8 +18,8 @@ public class CheckoutController(IOrderService orderService, IAddressService addr
 
         var vm = new CheckoutViewModel
         {
-            
-             
+
+
             CartItems = await cartItemService.GetAllAsync(),
             Addresses = await addressService.GetAllAsync(userId),
             CreateOrderDto = new CreateOrderDto

@@ -1,10 +1,12 @@
 ﻿using BLL.Services.Category;
 using BLL.Services.Product;
 using E_Commerce_MVC.Models.Product;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce_MVC.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;

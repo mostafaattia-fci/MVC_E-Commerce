@@ -1,11 +1,13 @@
 ﻿using BLL.Services.Cart;
 using DA.Models;
 using E_Commerce_MVC.Models.Cart;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce_MVC.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly ICartService _cartService;
@@ -13,7 +15,7 @@ namespace E_Commerce_MVC.Controllers
         public CartController(ICartService cartService, UserManager<ApplicationUser> userManager)
         {
             _cartService = cartService;
-            _userManager = userManager; 
+            _userManager = userManager;
         }
 
         // In a real app, you’ll get this from the authenticated user

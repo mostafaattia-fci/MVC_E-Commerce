@@ -2,7 +2,9 @@ using BLL.Mapper;
 using BLL.Services;
 using BLL.Services.Address;
 using BLL.Services.AdminCategory;
+using BLL.Services.AdminOrderService;
 using BLL.Services.AdminProduct;
+using BLL.Services.AdminUserService;
 using BLL.Services.Cart;
 using BLL.Services.Cartitem;
 using BLL.Services.Category;
@@ -68,7 +70,8 @@ namespace E_Commerce_MVC
             builder.Services.AddAutoMapper(typeof(CategoryProfile).Assembly);
             builder.Services.AddAutoMapper(typeof(CartItemProfile).Assembly);
             builder.Services.AddAutoMapper(typeof(AdminCategoryService).Assembly);
-
+            builder.Services.AddScoped<IAdminOrderService, AdminOrderService>();
+            builder.Services.AddScoped<IAdminUserService, AdminUserService>();
             builder.Services.AddHttpClient();
 
             var app = builder.Build();

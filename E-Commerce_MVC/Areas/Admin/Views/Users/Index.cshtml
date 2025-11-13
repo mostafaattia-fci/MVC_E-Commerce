@@ -1,0 +1,36 @@
+﻿@model IEnumerable<BLL.DTOs.Admin.UserAdminDto>
+
+@{
+    ViewData["Title"] = "Users Management";
+}
+
+<h1>Users Management</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => user.FullName)</td>
+                <td>@Html.DisplayFor(modelItem => user.Email)</td>
+                <td>@Html.DisplayFor(modelItem => user.Roles)</td>
+                <td>
+                    <a asp-action="ManageRoles" asp-route-id="@user.Id" class="btn btn-sm btn-secondary">Manage Roles</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

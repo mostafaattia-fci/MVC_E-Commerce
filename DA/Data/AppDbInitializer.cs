@@ -36,6 +36,7 @@ namespace DAL.Data
                     UserName = "admin@ecommerce.com",
                     Email = "admin@ecommerce.com",
                     FullName = "Admin User",
+                    Address = "Qena",
                     EmailConfirmed = true // تأكيد الإيميل مباشرة
                 };
 

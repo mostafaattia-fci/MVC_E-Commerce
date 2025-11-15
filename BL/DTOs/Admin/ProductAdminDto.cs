@@ -25,7 +25,7 @@ namespace BLL.DTOs.Admin
         [Display(Name = "Category")]
         [Required(ErrorMessage = "Please select a category")]
         public string CategoryId { get; set; } = string.Empty;
-
+        public string? ImageUrl { get; set; }
         public string? CategoryName { get; set; }
     }
 }

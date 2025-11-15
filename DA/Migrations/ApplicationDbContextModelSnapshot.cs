@@ -27,9 +27,6 @@ namespace DAL.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("City")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -71,9 +68,13 @@ namespace DAL.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Addresses");
                 });
@@ -85,6 +86,10 @@ namespace DAL.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -113,6 +118,9 @@ namespace DAL.Migrations
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -288,6 +296,7 @@ namespace DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalAmount")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UserId")
@@ -339,6 +348,7 @@ namespace DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("UnitPrice")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -442,6 +452,7 @@ namespace DAL.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Stock")
@@ -642,9 +653,13 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DA.Models.Address", b =>
                 {
-                    b.HasOne("DA.Models.ApplicationUser", null)
-                        .WithMany("Addresses")
-                        .HasForeignKey("ApplicationUserId");
+                    b.HasOne("DA.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DA.Models.CartItem", b =>
@@ -790,8 +805,6 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DA.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("Addresses");
-
                     b.Navigation("Orders");
 
                     b.Navigation("Reviews");

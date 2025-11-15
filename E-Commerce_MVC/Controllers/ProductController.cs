@@ -1,26 +1,30 @@
-﻿using BLL.Services.Category;
+﻿using BLL.DTOs.ReviewsDTOs;
+using BLL.Services.Category;
 using BLL.Services.Product;
+using BLL.Services.Review_Service;
 using E_Commerce_MVC.Models.Product;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce_MVC.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
+        private readonly IReviewService _reviewService;
 
-        public ProductController(IProductService productService, ICategoryService categoryService)
+        public ProductController(IProductService productService, ICategoryService categoryService, IReviewService reviewService)
         {
             _productService = productService;
             _categoryService = categoryService;
+            _reviewService = reviewService;
         }
         public async Task<IActionResult> Index(string? categoryId)
         {
-            // Get all categories for filter
             var categories = await _categoryService.GetAllAsync();
 
-            // Get products (filter by category if provided)
             var products = !string.IsNullOrEmpty(categoryId)
                 ? await _productService.GetByCategoryAsync(categoryId)
                 : await _productService.GetAllAsync();
@@ -35,21 +39,25 @@ namespace E_Commerce_MVC.Controllers
             return View(viewModel);
         }
 
-        // 🟢 GET: /Products/Details/{id}
         public async Task<IActionResult> Details(string id)
         {
             if (string.IsNullOrEmpty(id))
                 return BadRequest("Product ID is required.");
 
             var product = await _productService.GetByIdAsync(id);
+
             if (product == null)
                 return NotFound();
 
-            var viewModel = new ProductDetailsViewModel
-            {
-                Product = product,
-                Quantity = 1
-            };
+            var reviews = await _reviewService.GetReviewsForProductAsync(id);
+            
+
+                var viewModel = new ProductDetailsViewModel
+                {
+                    Product = product,
+                    Reviews = reviews,
+                    Quantity = 1
+                };
 
             return View(viewModel);
         }

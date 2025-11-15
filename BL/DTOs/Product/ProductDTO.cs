@@ -15,5 +15,7 @@ namespace BLL.DTOs.Product
         public string? ImageUrl { get; set; }
         public string CategoryId { get; set; }
         public string? CategoryName { get; set; }
+        public double Rating { get; set; }
+        public int ReviewsCount { get; set; }
     }
 }

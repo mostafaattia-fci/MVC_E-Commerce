@@ -13,5 +13,7 @@ namespace BLL.Services.Cart
         Task AddItemToCartAsync(string userId, string productId, int quantity);
         Task RemoveItemAsync(string cartItemId);
         Task UpdateQuantityAsync(string cartItemId, int quantity);
+        Task ClearCartAsync(string userId);
+
     }
 }

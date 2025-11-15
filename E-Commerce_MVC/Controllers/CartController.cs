@@ -1,11 +1,13 @@
 ﻿using BLL.Services.Cart;
 using DA.Models;
 using E_Commerce_MVC.Models.Cart;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce_MVC.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly ICartService _cartService;
@@ -13,13 +15,12 @@ namespace E_Commerce_MVC.Controllers
         public CartController(ICartService cartService, UserManager<ApplicationUser> userManager)
         {
             _cartService = cartService;
-            _userManager = userManager; 
+            _userManager = userManager;
         }
 
-        // In a real app, you’ll get this from the authenticated user
+
         private string GetUserId() => _userManager.GetUserId(User);
 
-        // 🟢 GET: /Cart
         public async Task<IActionResult> Index()
         {
             var cartDto = await _cartService.GetCartAsync(GetUserId());
@@ -32,7 +33,6 @@ namespace E_Commerce_MVC.Controllers
             return View(viewModel);
         }
 
-        // 🟢 POST: /Cart/AddToCart
         [HttpPost]
         public async Task<IActionResult> AddToCart(string productId, int qty)
         {
@@ -44,7 +44,6 @@ namespace E_Commerce_MVC.Controllers
             return RedirectToAction("Index", "Cart");
         }
 
-        // 🟢 POST: /Cart/Remove
         [HttpPost]
         public async Task<IActionResult> Remove(string cartItemId)
         {
@@ -56,7 +55,6 @@ namespace E_Commerce_MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        // 🟢 POST: /Cart/UpdateQuantity
         [HttpPost]
         public async Task<IActionResult> UpdateQuantity(string cartItemId, int qty)
         {

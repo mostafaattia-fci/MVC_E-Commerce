@@ -24,7 +24,6 @@ namespace BLL.Services.Cart
             _mapper = mapper;
         }
 
-        // 🟢 Get the current user's cart
         public async Task<CartDTO> GetCartAsync(string userId)
         {
             var items = await _unitOfWork.CartItems
@@ -36,11 +35,9 @@ namespace BLL.Services.Cart
             return new CartDTO
             {
                 Items = items,
-                // CartDto has Total property calculated automatically
             };
         }
 
-        // 🟢 Add a product to cart
         public async Task AddItemToCartAsync(string userId, string productId, int qty)
         {
             var existingItem = await _unitOfWork.CartItems
@@ -68,7 +65,6 @@ namespace BLL.Services.Cart
             await _unitOfWork.CompleteAsync();
         }
 
-        // 🟢 Remove an item
         public async Task RemoveItemAsync(string cartItemId)
         {
             var item = await _unitOfWork.CartItems.GetByIdAsync(cartItemId);
@@ -79,7 +75,6 @@ namespace BLL.Services.Cart
             await _unitOfWork.CompleteAsync();
         }
 
-        // 🟢 Update item quantity
         public async Task UpdateQuantityAsync(string cartItemId, int qty)
         {
             var item = await _unitOfWork.CartItems.GetByIdAsync(cartItemId);
@@ -88,6 +83,20 @@ namespace BLL.Services.Cart
 
             item.Quantity = qty;
             _unitOfWork.CartItems.Update(item);
+            await _unitOfWork.CompleteAsync();
+        }
+        public async Task ClearCartAsync(string userId)
+        {
+            var cartItems = _unitOfWork.CartItems
+                .GetQueryableWithTracking()
+                .IgnoreQueryFilters()
+                .Where(c => c.UserId == userId);
+
+            foreach (var item in cartItems)
+            {
+                _unitOfWork.CartItems.Remove(item);
+            }
+
             await _unitOfWork.CompleteAsync();
         }
     }

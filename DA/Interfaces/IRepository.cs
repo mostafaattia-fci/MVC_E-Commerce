@@ -6,10 +6,12 @@
 
         IQueryable<T> GetQueryable();
 
+        IQueryable<T> GetQueryableWithTracking();
         Task AddAsync(T entity, CancellationToken cancellationToken = default);
 
         void Update(T entity);
 
         void Remove(T entity);
+
     }
 }

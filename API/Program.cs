@@ -1,5 +1,3 @@
-
-using AutoMapper;
 using BLL.Mapper;
 using BLL.Services;
 using BLL.Services.Address;
@@ -18,8 +16,11 @@ using DA;
 using DA.Models;
 using DAL.Interfaces;
 using DAL.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace API
 {
@@ -44,7 +45,26 @@ namespace API
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+         .AddJwtBearer(options =>
+         {
+             options.SaveToken = true;
+             options.RequireHttpsMetadata = false;
+             options.TokenValidationParameters = new TokenValidationParameters
+             {
+                 ValidateIssuer = true,
+                 ValidateAudience = true,
+                 ValidIssuer = builder.Configuration["JWT:IssuerIP"],
+                 ValidAudience = builder.Configuration["JWT:AudienceIP"],
+                 IssuerSigningKey = new SymmetricSecurityKey(
+                     Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretKey"]))
+             };
+         });
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();

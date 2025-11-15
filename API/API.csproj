@@ -13,11 +13,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BL\BLL.csproj" />
+    <ProjectReference Include="..\DA\DAL.csproj" />
+    <ProjectReference Include="..\E-Commerce_MVC\E-Commerce_MVC.csproj" />
   </ItemGroup>
 
 </Project>

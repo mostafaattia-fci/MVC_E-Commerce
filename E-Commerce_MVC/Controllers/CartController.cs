@@ -18,10 +18,9 @@ namespace E_Commerce_MVC.Controllers
             _userManager = userManager;
         }
 
-        // In a real app, you’ll get this from the authenticated user
+
         private string GetUserId() => _userManager.GetUserId(User);
 
-        // 🟢 GET: /Cart
         public async Task<IActionResult> Index()
         {
             var cartDto = await _cartService.GetCartAsync(GetUserId());
@@ -34,7 +33,6 @@ namespace E_Commerce_MVC.Controllers
             return View(viewModel);
         }
 
-        // 🟢 POST: /Cart/AddToCart
         [HttpPost]
         public async Task<IActionResult> AddToCart(string productId, int qty)
         {
@@ -46,7 +44,6 @@ namespace E_Commerce_MVC.Controllers
             return RedirectToAction("Index", "Cart");
         }
 
-        // 🟢 POST: /Cart/Remove
         [HttpPost]
         public async Task<IActionResult> Remove(string cartItemId)
         {
@@ -58,7 +55,6 @@ namespace E_Commerce_MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        // 🟢 POST: /Cart/UpdateQuantity
         [HttpPost]
         public async Task<IActionResult> UpdateQuantity(string cartItemId, int qty)
         {

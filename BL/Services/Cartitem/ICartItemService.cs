@@ -4,6 +4,6 @@ namespace BLL.Services.Cartitem
 {
     public interface ICartItemService
     {
-        Task<List<CartItemDTO>> GetAllAsync();
+        Task<List<CartItemDTO>> GetAllAsync(string userId);
     }
 }

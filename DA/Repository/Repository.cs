@@ -25,6 +25,10 @@ namespace DAL.Repository
         {
             return _dbSet.AsNoTracking();
         }
+        public IQueryable<T> GetQueryableWithTracking()
+        {
+            return _dbSet;
+        }
 
         public async Task AddAsync(T entity, CancellationToken cancellationToken = default)
         {

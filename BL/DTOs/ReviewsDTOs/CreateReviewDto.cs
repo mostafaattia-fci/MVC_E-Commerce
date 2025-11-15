@@ -11,6 +11,6 @@ namespace BLL.DTOs.ReviewsDTOs
         public string ProductId { get; set; }
         public string OrderId { get; set; }
         public string Comment { get; set; }
-        public int Rating { get; set; } // 1–5 stars
+        public int Rating { get; set; }
     }
 }

@@ -29,7 +29,7 @@
 
     <div class="row g-4">
         <div class="col-lg-8">
-            <!-- Shipping Address Card -->
+          
             <div class="card shadow-lg border-0 rounded-3 mb-4">
                 <div class="card-header bg-primary text-white py-3">
                     <h5 class="mb-0">
@@ -37,7 +37,7 @@
                     </h5>
                 </div>
                 <div class="card-body p-4">
-                    <!-- ✅ Main Checkout Form -->
+                   
                     <form asp-action="Process" method="post" id="checkoutForm">
                         <input type="hidden" asp-for="CreateOrderDto.UserId" />
 
@@ -113,7 +113,7 @@
                         </div>
                     </form>
 
-                    <!-- ✅ Separate Delete Form -->
+                  
                     <form id="deleteAddressForm" asp-controller="Address" asp-action="DeleteAddress" method="post" style="display:none;">
                         @Html.AntiForgeryToken()
                         <input type="hidden" name="id" id="selectedAddressId" />
@@ -121,7 +121,7 @@
                 </div>
             </div>
 
-            <!-- Cart Items Card -->
+           
             <div class="card shadow-lg border-0 rounded-3">
                 <div class="card-header bg-info text-white py-3">
                     <h5 class="mb-0">
@@ -167,7 +167,7 @@
 
         </div>
 
-        <!-- Order Summary Sidebar -->
+      
         <div class="col-lg-4">
             <div class="card shadow-lg border-0 rounded-3 position-sticky" style="top: 20px;">
                 <div class="card-header bg-success text-white py-3">
@@ -222,7 +222,7 @@
             const hiddenInput = document.getElementById("selectedAddressId");
             const editBtn = document.getElementById("editAddressBtn");
 
-            // ✅ Edit button
+           
             if (editBtn) {
                 editBtn.addEventListener("click", function (e) {
                     e.preventDefault();
@@ -235,7 +235,7 @@
                 });
             }
 
-            // ✅ Delete button
+           
             if (deleteBtn) {
                 deleteBtn.addEventListener("click", function () {
                     const selectedId = addressSelect?.value;

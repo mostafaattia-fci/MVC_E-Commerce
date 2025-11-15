@@ -19,9 +19,11 @@ namespace BLL.Services.Cartitem
             _uow = uow;
             _mapper = mapper;
         }
-        public Task<List<CartItemDTO>> GetAllAsync()
+        public Task<List<CartItemDTO>> GetAllAsync(string userId)
         {
-            var cartItems =  _uow.CartItems.GetQueryable().Select(c => new CartItemDTO
+            var cartItems =  _uow.CartItems.GetQueryable()
+                .Where(c => c.UserId == userId)
+                .Select(c => new CartItemDTO
             {
                 ProductId = c.Product.Id,
                 ProductName = c.Product.Name,

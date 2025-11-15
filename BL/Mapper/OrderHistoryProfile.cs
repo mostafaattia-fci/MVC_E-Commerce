@@ -17,8 +17,6 @@ namespace BLL.Mapper
         {
 
 
-
-            // 🟢 Orders
             CreateMap<Order, OrderHistoryDto>();
             CreateMap<CreatePartailReviewViewModel, CreateReviewDto>();
             //CreateMap<OrderHistoryViewModel, OrderHistoryDto>();
@@ -27,12 +25,12 @@ namespace BLL.Mapper
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
                 .ForMember(dest => dest.OrderItems, opt => opt.MapFrom(src => src.OrderItems));
 
-            // 🟢 OrderItems
+          
             CreateMap<OrderItem, OrderItemDTO>()
                 .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
                 .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.UnitPrice));
 
-            // 🟢 Reviews
+           
             CreateMap<Review, ReviewDto>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName));
 

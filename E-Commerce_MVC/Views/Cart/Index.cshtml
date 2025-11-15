@@ -1,7 +1,7 @@
 ﻿@model E_Commerce_MVC.Models.Cart.CartViewModel
 
 <div class="container py-4">
-    <!-- Page Header -->
+  
     <div class="mb-4">
         <h2 class="fw-bold">
             <i class="bi bi-cart3 me-2"></i>Shopping Cart
@@ -11,7 +11,7 @@
 
     @if (!Model.Items.Any())
     {
-        <!-- Empty Cart State -->
+     
         <div class="text-center py-5">
             <div class="mb-4">
                 <i class="bi bi-cart-x display-1 text-muted"></i>
@@ -26,7 +26,7 @@
     else
     {
         <div class="row g-4">
-            <!-- Cart Items -->
+         
             <div class="col-lg-8">
                 <div class="card border-0 shadow-sm">
                     <div class="card-header bg-white border-bottom py-3">
@@ -39,26 +39,26 @@
                         {
                             <div class="p-4 border-bottom">
                                 <div class="row align-items-center">
-                                    <!-- Product Image Placeholder -->
+                                   
                                     <div class="col-md-2 mb-3 mb-md-0">
                                         <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height: 80px;">
                                             <i class="bi bi-image text-muted fs-3"></i>
                                         </div>
                                     </div>
 
-                                    <!-- Product Details -->
+                                   
                                     <div class="col-md-4 mb-3 mb-md-0">
                                         <h6 class="fw-semibold mb-1">@item.ProductName</h6>
                                         <p class="text-muted small mb-0">SKU: #@item.Id</p>
                                     </div>
 
-                                    <!-- Price -->
+                                 
                                     <div class="col-md-2 mb-3 mb-md-0 text-center">
                                         <p class="mb-0 fw-semibold">@item.Price.ToString("C")</p>
                                         <small class="text-muted">each</small>
                                     </div>
 
-                                    <!-- Quantity Controls -->
+                                   
                                     <div class="col-md-2 mb-3 mb-md-0">
                                         <form asp-action="UpdateQuantity" method="post" class="d-flex align-items-center gap-2">
                                             <input type="hidden" name="cartItemId" value="@item.Id" />
@@ -72,7 +72,7 @@
                                         </form>
                                     </div>
 
-                                    <!-- Item Total & Remove -->
+                                  
                                     <div class="col-md-2 text-end">
                                         <p class="fw-bold text-primary mb-2">@((item.Price * item.Quantity).ToString("C"))</p>
                                         <form asp-action="Remove" method="post" class="d-inline">
@@ -88,7 +88,7 @@
                     </div>
                 </div>
 
-                <!-- Continue Shopping Button -->
+               
                 <div class="mt-3">
                     <a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary">
                         <i class="bi bi-arrow-left me-2"></i>Continue Shopping
@@ -96,7 +96,7 @@
                 </div>
             </div>
 
-            <!-- Order Summary -->
+           
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm sticky-top" style="top: 20px;">
                     <div class="card-header bg-primary text-white py-3">
@@ -105,7 +105,7 @@
                         </h5>
                     </div>
                     <div class="card-body">
-                        <!-- Summary Items -->
+                       
                         <div class="d-flex justify-content-between mb-3 pb-3 border-bottom">
                             <span class="text-muted">Subtotal</span>
                             <span class="fw-semibold">@Model.Total.ToString("C")</span>
@@ -121,18 +121,18 @@
                             <span class="fw-semibold">@((Model.Total * 0.1m).ToString("C"))</span>
                         </div>
 
-                        <!-- Total -->
+                       
                         <div class="d-flex justify-content-between mb-4">
                             <h5 class="fw-bold mb-0">Total</h5>
                             <h5 class="fw-bold text-primary mb-0">@((Model.Total * 1.1m).ToString("C"))</h5>
                         </div>
 
-                        <!-- Checkout Button -->
+                      
                         <a asp-controller="Checkout" asp-action="Index" class="btn btn-success btn-lg w-100 mb-3">
                             <i class="bi bi-lock-fill me-2"></i>Proceed to Checkout
                         </a>
 
-                        <!-- Promo Code -->
+                       
                         <div class="mt-3">
                             <div class="input-group input-group-sm">
                                 <input type="text" class="form-control" placeholder="Promo code">
@@ -141,7 +141,7 @@
                         </div>
                     </div>
 
-                    <!-- Trust Badges -->
+                   
                     <div class="card-footer bg-light border-top-0 text-center">
                         <small class="text-muted">
                             <i class="bi bi-shield-check text-success me-1"></i>Secure Checkout

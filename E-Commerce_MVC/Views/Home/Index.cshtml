@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home";
 }
 
-<!-- Hero Section -->
+
 <section class="py-5 text-center text-white bg-primary bg-gradient mb-5">
     <div class="container py-5">
         <h1 class="display-3 fw-bold mb-3">Welcome to E-Commerce</h1>
@@ -13,7 +13,7 @@
     </div>
 </section>
 
-<!-- Features Section -->
+
 <section class="container mb-5">
     <div class="row g-4 text-center">
         <div class="col-md-4">
@@ -46,102 +46,9 @@
     </div>
 </section>
 
-<!-- Featured Products Section -->
-<section class="container mb-5">
-    <div class="text-center mb-5">
-        <h2 class="display-5 fw-bold mb-2">Featured Products</h2>
-        <p class="text-muted">Check out our most popular items</p>
-    </div>
 
-    <div class="row g-4">
-        <!-- Product Card 1 -->
-        <div class="col-lg-4 col-md-6">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="position-relative overflow-hidden">
-                    <img src="https://via.placeholder.com/400x300/6366f1/ffffff?text=Product+1" class="card-img-top" alt="Product 1">
-                    <span class="badge bg-danger position-absolute top-0 end-0 m-3">Sale</span>
-                </div>
-                <div class="card-body text-center">
-                    <h5 class="card-title fw-semibold mb-2">Premium Headphones</h5>
-                    <p class="card-text text-muted small mb-3">Wireless noise-canceling headphones</p>
-                    <div class="mb-3">
-                        <span class="text-muted text-decoration-line-through me-2">$79.99</span>
-                        <span class="h5 text-primary fw-bold mb-0">$49.99</span>
-                    </div>
-                    <div class="mb-3">
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-half text-warning"></i>
-                        <span class="text-muted small ms-1">(128)</span>
-                    </div>
-                    <a href="#" class="btn btn-primary w-100">
-                        <i class="bi bi-cart-plus me-2"></i>Add to Cart
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Product Card 2 -->
-        <div class="col-lg-4 col-md-6">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="position-relative overflow-hidden">
-                    <img src="https://via.placeholder.com/400x300/8b5cf6/ffffff?text=Product+2" class="card-img-top" alt="Product 2">
-                    <span class="badge bg-success position-absolute top-0 end-0 m-3">New</span>
-                </div>
-                <div class="card-body text-center">
-                    <h5 class="card-title fw-semibold mb-2">Smart Watch</h5>
-                    <p class="card-text text-muted small mb-3">Fitness tracking with heart rate monitor</p>
-                    <div class="mb-3">
-                        <span class="h5 text-primary fw-bold mb-0">$129.99</span>
-                    </div>
-                    <div class="mb-3">
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star text-warning"></i>
-                        <span class="text-muted small ms-1">(95)</span>
-                    </div>
-                    <a href="#" class="btn btn-primary w-100">
-                        <i class="bi bi-cart-plus me-2"></i>Add to Cart
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Product Card 3 -->
-        <div class="col-lg-4 col-md-6">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="position-relative overflow-hidden">
-                    <img src="https://via.placeholder.com/400x300/ec4899/ffffff?text=Product+3" class="card-img-top" alt="Product 3">
-                </div>
-                <div class="card-body text-center">
-                    <h5 class="card-title fw-semibold mb-2">Wireless Speaker</h5>
-                    <p class="card-text text-muted small mb-3">Portable Bluetooth speaker with bass</p>
-                    <div class="mb-3">
-                        <span class="h5 text-primary fw-bold mb-0">$79.99</span>
-                    </div>
-                    <div class="mb-3">
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <span class="text-muted small ms-1">(203)</span>
-                    </div>
-                    <a href="#" class="btn btn-primary w-100">
-                        <i class="bi bi-cart-plus me-2"></i>Add to Cart
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="text-center mt-5">
-        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-primary btn-lg px-5">
-            View All Products <i class="bi bi-arrow-right ms-2"></i>
-        </a>
-    </div>
-</section>
+<div class="text-center mt-5">
+    <a asp-controller="Product" asp-action="Index" class="btn btn-outline-primary btn-lg px-5">
+        View All Products <i class="bi bi-arrow-right ms-2"></i>
+    </a>
+</div>

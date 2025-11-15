@@ -10,7 +10,6 @@ namespace BLL.Services.AdminUserService
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        // ◀️ احقن خدمات Identity
         public AdminUserService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
@@ -65,10 +64,8 @@ namespace BLL.Services.AdminUserService
             var userRoles = await _userManager.GetRolesAsync(user);
             var selectedRoles = viewModel.Roles.Where(r => r.IsSelected).Select(r => r.RoleName);
 
-            // 1. إضافة الرتب الجديدة (إلا إذا كانت موجودة)
             var result = await _userManager.AddToRolesAsync(user, selectedRoles.Except(userRoles));
 
-            // 2. حذف الرتب القديمة (إلا إذا كانت ما زالت مختارة)
             result = await _userManager.RemoveFromRolesAsync(user, userRoles.Except(selectedRoles));
         }
     }

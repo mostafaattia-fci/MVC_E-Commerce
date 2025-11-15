@@ -49,18 +49,16 @@ public class MockPaymentService : IMockPaymentService
         };
     }
 
-    // ✅ Paymob Integration
     private async Task<PaymentResponseDto> PayWithPaymob(PaymentRequestDto dto)
     {
         try
         {
             var client = _httpClientFactory.CreateClient();
-            // 1️⃣ Get Auth Token
+         
             var authResp = await client.PostAsJsonAsync($"{_paymobBaseUrl}/auth/tokens", new { api_key = _paymobApiKey });
             var authJson = await authResp.Content.ReadFromJsonAsync<JsonElement>();
             var token = authJson.GetProperty("token").GetString();
 
-            // 2️⃣ Register Order
             var orderData = new
             {
                 auth_token = token,
@@ -74,7 +72,7 @@ public class MockPaymentService : IMockPaymentService
             var orderJson = await orderResp.Content.ReadFromJsonAsync<JsonElement>();
             var orderId = orderJson.GetProperty("id").GetInt32();
 
-            // 3️⃣ Request Payment Key
+         
             var paymentKeyReq = new
             {
                 auth_token = token,
@@ -103,16 +101,15 @@ public class MockPaymentService : IMockPaymentService
             var paymentJson = await paymentResp.Content.ReadFromJsonAsync<JsonElement>();
             var paymentKey = paymentJson.GetProperty("token").GetString();
 
-            // 4️⃣ Generate Payment Link
+        
             var paymentUrl = $"https://accept.paymob.com/api/acceptance/iframes/{_paymobIframeId}?payment_token={paymentKey}";
 
-            // 5️⃣ Save payment entry in DB
             var pay = new Payment
             {
                 OrderId = dto.OrderId,
                 PaymentMethod = PaymentMethod.Paymob,
                 TransactionId = paymentKey,
-                IsSuccessful = false // نعتبرها لم تتم بعد لحين Callback
+                IsSuccessful = false 
             };
             await _uow.Payments.AddAsync(pay);
             await _uow.CompleteAsync();
@@ -121,7 +118,7 @@ public class MockPaymentService : IMockPaymentService
             {
                 IsSuccessful = true,
                 TransactionId = paymentKey,
-                Message = paymentUrl // نرجع الرابط نفسه عشان نوجّه العميل عليه
+                Message = paymentUrl 
             };
         }
         catch (Exception ex)

@@ -26,8 +26,8 @@ namespace API.Controllers
             var dto = new CreateOrderDto
             {
                 UserId = orderVM.UserId,
-                AddressId= orderVM.AddressId,
-                PaymentMethod=orderVM.PaymentMethod
+                AddressId = orderVM.AddressId,
+                PaymentMethod = orderVM.PaymentMethod
             };
 
             var result = await _orderService.CreateOrderFromCartAsync(dto);
@@ -39,9 +39,9 @@ namespace API.Controllers
             {
                 Id = result.Order.Id,
                 UserId = result.Order.UserId,
-                OrderDate=result.Order.OrderDate,
-                Status= result.Order.Status,
-                TotalAmount= result.Order.TotalAmount,
+                OrderDate = result.Order.OrderDate,
+                Status = result.Order.Status,
+                TotalAmount = result.Order.TotalAmount,
                 Items = result.Order.Items,
                 PaymentMethod = result.Order.PaymentMethod,
             };

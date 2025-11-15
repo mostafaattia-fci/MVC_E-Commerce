@@ -9,7 +9,7 @@ namespace BLL.Services.Review_Service
 {
     public interface IReviewService
     {
-        Task<IEnumerable<ReviewDto>> GetReviewsForProductAsync(string productId);
+        Task<List<ReviewDto>> GetReviewsForProductAsync(string productId);
         Task AddReviewAsync(string userId, CreateReviewDto dto);
     }
 

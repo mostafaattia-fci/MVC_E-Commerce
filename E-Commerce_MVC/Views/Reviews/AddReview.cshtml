@@ -21,11 +21,10 @@
                     </div>
 
                     <form asp-controller="Reviews" asp-action="AddReview" method="post">
-                        <!-- Hidden fields -->
+                       
                         <input type="hidden" asp-for="ProductId" />
                         <input type="hidden" asp-for="OrderId" />
 
-                        <!-- Rating Section -->
                         <div class="mb-4">
                             <label asp-for="Rating" class="form-label fw-semibold">
                                 <i class="bi bi-star-half me-1"></i>Your Rating
@@ -51,7 +50,6 @@
                                 </div>
                             </div>
 
-                            <!-- Star Preview -->
                             <div class="mt-3" id="starPreview">
                                 <span class="text-muted small">Preview: </span>
                                 <span id="stars" class="fs-5">
@@ -64,7 +62,6 @@
                             </div>
                         </div>
 
-                        <!-- Comment Section -->
                         <div class="mb-4">
                             <label asp-for="Comment" class="form-label fw-semibold">
                                 <i class="bi bi-chat-left-text me-1"></i>Your Review
@@ -82,7 +79,7 @@
                             <span asp-validation-for="Comment" class="text-danger small"></span>
                         </div>
 
-                        <!-- Action Buttons -->
+                      
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
                             <a asp-controller="Orders" asp-action="Details" asp-route-id="@Model.OrderId" class="btn btn-outline-secondary px-4">
                                 <i class="bi bi-x-circle me-1"></i>Cancel
@@ -94,7 +91,7 @@
                     </form>
                 </div>
 
-                <!-- Guidelines Section -->
+                
                 <div class="card-footer bg-light border-0 py-3">
                     <h6 class="fw-semibold mb-2">
                         <i class="bi bi-shield-check me-1"></i>Review Guidelines
@@ -115,7 +112,7 @@
     <partial name="_ValidationScriptsPartial" />
 
     <script>
-        // Star rating preview
+     
         document.addEventListener('DOMContentLoaded', function() {
             const ratingInput = document.querySelector('input[name="Rating"]');
             const starsContainer = document.getElementById('stars');

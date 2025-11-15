@@ -10,7 +10,7 @@ namespace DA.Models
         public Order? Order { get; set; }
 
         [Required]
-        public PaymentMethod PaymentMethod { get; set; } // Stripe / PayPal / Fawry
+        public PaymentMethod PaymentMethod { get; set; }
 
         public string? TransactionId { get; set; }
 

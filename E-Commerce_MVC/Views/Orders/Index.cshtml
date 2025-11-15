@@ -5,7 +5,7 @@
 }
 
 <div class="container mt-5 mb-5">
-    <!-- Page Header -->
+
     <div class="mb-4">
         <h2 class="fw-bold">
             <i class="bi bi-bag-check-fill me-2"></i>My Orders
@@ -13,7 +13,7 @@
         <p class="text-muted">View and track all your order history</p>
     </div>
 
-    <!-- Orders Card -->
+    
     <div class="card shadow-lg border-0 rounded-3">
         <div class="card-header bg-primary text-white py-3">
             <div class="d-flex justify-content-between align-items-center">
@@ -111,7 +111,7 @@
         </div>
     </div>
 
-    <!-- Quick Stats (Optional) -->
+  
     @if (Model != null && Model.Any())
     {
         var pendingCount = Model.Count(o => o.Status == "Pending");
@@ -159,7 +159,7 @@
         </div>
     }
 
-    <!-- Back Button -->
+  
     <div class="mt-4">
         <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">
             <i class="bi bi-house-door me-1"></i> Back to Home

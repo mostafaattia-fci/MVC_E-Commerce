@@ -21,14 +21,14 @@ namespace BLL.Services.Review_Service
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ReviewDto>> GetReviewsForProductAsync(string productId)
+        public async Task<List<ReviewDto>> GetReviewsForProductAsync(string productId)
         {
             var reviews = await _unitOfWork.Reviews
                 .GetQueryable()
                 .Where(r => r.ProductId == productId && !r.IsDeleted)
                 .ToListAsync();
 
-            return _mapper.Map<IEnumerable<ReviewDto>>(reviews);
+            return _mapper.Map<IEnumerable<ReviewDto>>(reviews).ToList();
         }
 
         public async Task AddReviewAsync(string userId, CreateReviewDto dto)

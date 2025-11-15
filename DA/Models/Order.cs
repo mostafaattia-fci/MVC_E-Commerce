@@ -13,7 +13,7 @@ namespace DA.Models
         public DateTime OrderDate { get; set; } = DateTime.UtcNow;
 
         [MaxLength(50)]
-        public OrderStatus Status { get; set; } = OrderStatus.Pending; // Pending / Shipped / Delivered / Cancelled
+        public OrderStatus Status { get; set; } = OrderStatus.Pending;
         [Precision(18, 2)]
 
         public decimal TotalAmount { get; set; }

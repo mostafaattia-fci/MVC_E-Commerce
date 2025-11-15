@@ -68,7 +68,7 @@ namespace DA
 
             foreach (var entry in ChangeTracker.Entries())
             {
-                // 1. التعامل مع IAuditable
+               
                 if (entry.Entity is IAuditable auditableEntity)
                 {
                     if (entry.State == EntityState.Added)
@@ -83,12 +83,12 @@ namespace DA
                     }
                 }
 
-                // 2. التعامل مع ISoftDelete
+           
                 if (entry.Entity is ISoftDelete softDeleteEntity)
                 {
                     if (entry.State == EntityState.Deleted)
                     {
-                        // منع الحذف الفعلي وتحويله إلى تعديل
+                       
                         entry.State = EntityState.Modified;
                         softDeleteEntity.IsDeleted = true;
                         softDeleteEntity.DeletedOnUtc = now;

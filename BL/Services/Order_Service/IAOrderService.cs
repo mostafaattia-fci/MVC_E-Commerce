@@ -11,5 +11,6 @@ namespace BLL.Services.Order_Service
     {
         Task<IEnumerable<OrderHistoryDto>> GetOrderHistoryAsync(string userId);
         Task<OrderDTO> GetOrderDetailsAsync(string orderId);
+        public Task CancelOrderAsync(string orderId, string userId);
     }
 }

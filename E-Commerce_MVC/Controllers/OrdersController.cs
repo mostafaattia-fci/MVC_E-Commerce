@@ -37,5 +37,23 @@ namespace MVC.Controllers
 
             return View(order);
         }
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Cancel(string id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            try
+            {
+                await _orderService.CancelOrderAsync(id, userId);
+                TempData["Success"] = "Order has been canceled successfully.";
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
+
+            return RedirectToAction("Details", new { id });
+        }
     }
 }

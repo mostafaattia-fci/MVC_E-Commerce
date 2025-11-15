@@ -15,7 +15,7 @@ namespace BLL.Mapper
                            opt => opt.MapFrom(src => src.ImageUrl));
 
             CreateMap<ProductAdminDto, Product>()
-                .ForMember(dest => dest.Category, opt => opt.Ignore()); // نتجاهل الـ Category Object
+                .ForMember(dest => dest.Category, opt => opt.Ignore());
 
             CreateMap<CreateProductDto, Product>()
                 .ForMember(dest => dest.Category, opt => opt.Ignore())
@@ -25,7 +25,11 @@ namespace BLL.Mapper
                 .ForMember(dest => dest.Category, opt => opt.Ignore());
 
             CreateMap<DA.Models.Product, DTOs.Product.ProductDTO>()
-                .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : string.Empty));
+                .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : string.Empty))
+                .ForMember(dest => dest.Rating,
+                    opt => opt.MapFrom(src => src.Reviews.Any() ? src.Reviews.Average(r => r.Rating): 0))
+                .ForMember(dest => dest.ReviewsCount,
+                    opt => opt.MapFrom(src => src.Reviews.Count));
         }
     }
 }

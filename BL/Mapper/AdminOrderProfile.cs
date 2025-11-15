@@ -20,7 +20,7 @@ namespace BLL.Mapper
                 .ForMember(d => d.CustomerName, opt => opt.MapFrom(s => s.User.FullName))
                 .ForMember(d => d.CustomerEmail, opt => opt.MapFrom(s => s.User.Email))
                 .ForMember(d => d.Items, opt => opt.MapFrom(s => s.OrderItems))
-                .ForMember(d => d.ShippingAddress, opt => opt.MapFrom(s => "TODO: Map Address")); // ◀️ يحتاج لوجيك خاص
+                .ForMember(d => d.ShippingAddress, opt => opt.MapFrom(s => "TODO: Map Address"));
         }
     }
 }

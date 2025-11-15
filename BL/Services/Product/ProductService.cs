@@ -22,7 +22,7 @@ namespace BLL.Services.Product
             _mapper = mapper;
         }
 
-        // 🟢 Get all products (uses AutoMapper projection)
+ 
         public async Task<IEnumerable<ProductDTO>> GetAllAsync()
         {
             return await _unitOfWork.Products
@@ -31,7 +31,6 @@ namespace BLL.Services.Product
                 .ToListAsync();
         }
 
-        // 🟢 Get product by ID
         public async Task<ProductDTO?> GetByIdAsync(string id)
         {
             var product = await _unitOfWork.Products
@@ -43,7 +42,6 @@ namespace BLL.Services.Product
             return product;
         }
 
-        // 🟢 Get products by category
         public async Task<IEnumerable<ProductDTO>> GetByCategoryAsync(string categoryId)
         {
             return await _unitOfWork.Products
@@ -53,7 +51,6 @@ namespace BLL.Services.Product
                 .ToListAsync();
         }
 
-        // 🟢 Add new product
         public async Task<ProductDTO> AddAsync(ProductDTO dto)
         {
             var entity = _mapper.Map<DA.Models.Product>(dto);
@@ -63,7 +60,6 @@ namespace BLL.Services.Product
             return _mapper.Map<ProductDTO>(entity);
         }
 
-        // 🟢 Update product
         public async Task UpdateAsync(ProductDTO dto)
         {
             var existing = await _unitOfWork.Products.GetByIdAsync(dto.Id);
@@ -75,7 +71,6 @@ namespace BLL.Services.Product
             await _unitOfWork.CompleteAsync();
         }
 
-        // 🟢 Delete product
         public async Task DeleteAsync(string id)
         {
             var product = await _unitOfWork.Products.GetByIdAsync(id);

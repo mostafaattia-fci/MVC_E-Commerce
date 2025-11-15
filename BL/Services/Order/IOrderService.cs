@@ -10,6 +10,6 @@ namespace BLL.Services.Order
     public interface IOrderService
     {
         public Task<(bool Success, string Message, OrderDto? Order)> CreateOrderFromCartAsync(CreateOrderDto dto);
-
+       
     }
 }

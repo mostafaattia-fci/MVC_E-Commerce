@@ -33,7 +33,6 @@ namespace BLL.Services.AdminOrderService
                 .ProjectTo<OrderAdminDetailsDto>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync(cancellationToken);
 
-            // (الـ Address يحتاج مابينج خاص، سنضيفه لاحقاً)
             return order;
         }
 

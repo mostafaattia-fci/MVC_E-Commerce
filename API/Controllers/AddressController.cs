@@ -81,7 +81,7 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<bool> Update(string id, CreateAddressViewModel vm)
+        public async Task<ApiResponse<bool>> Update(string id, CreateAddressViewModel vm)
         {
             var dto = new AddressDto
             {
@@ -94,14 +94,14 @@ namespace API.Controllers
             };
             await _addressService.UpdateAsync(dto);
 
-            return true;
+            return ResponseHelper.Success(true,"Updated successfully");
         }
 
         [HttpDelete("{id}")]
-        public async Task<bool> Delete(string id)
+        public async Task<ApiResponse<bool>> Delete(string id)
         {
             await _addressService.DeleteAsync(id);
-            return true;
+            return ResponseHelper.Success(true,"Deleted successfully");
         }
     }
 }
